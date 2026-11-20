@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Igor Mavl</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Igor Mavl — Full Stack Developer (PHP / JavaScript) из Киева. С 2013 года: сайты и веб-приложения, верстка по макетам, REST API, React, Laravel, WordPress, AI и RAG. Пет-проекты: TrackDesk, DevBox и игра на Godot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+:root{
+  /* Layout: a typeset CV page, 960px wide. Section titles sit in a 200px left column, content on the right; one column on phones. */
+  --bg:#FFFFFF;
+  --text:#17191C;
+  --muted:#5C6470;
+  --rule:#E3E6EA;
+  --accent:#1D5FB4;
+  --tint:#F4F6F8;
+  --glow-a:rgba(29,95,180,.15);
+  --glow-b:rgba(14,150,128,.11);
+  --serif:"IBM Plex Serif","IBM Plex Sans Hebrew",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans","IBM Plex Sans Hebrew",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --label:200px;
+  --sub:150px;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141618; --text:#E7E9EC; --muted:#A0A7B1; --rule:#2B2F34; --accent:#86B4F0; --tint:#1C1F23;
+    --glow-a:rgba(134,180,240,.16); --glow-b:rgba(60,200,165,.10);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141618; --text:#E7E9EC; --muted:#A0A7B1; --rule:#2B2F34; --accent:#86B4F0; --tint:#1C1F23;
+  --glow-a:rgba(134,180,240,.16); --glow-b:rgba(60,200,165,.10);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:1rem;line-height:1.6;font-variant-numeric:tabular-nums}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+[dir="rtl"] .ltr{text-align:right}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.glow{position:absolute;left:0;top:0;border-radius:50%;will-change:transform}
+.glow.a{width:860px;height:860px;margin:-430px 0 0 -430px;background:radial-gradient(closest-side,var(--glow-a),transparent)}
+.glow.b{width:1100px;height:1100px;margin:-550px 0 0 -550px;background:radial-gradient(closest-side,var(--glow-b),transparent)}
+.page{position:relative;z-index:1;max-width:960px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section[id]{scroll-margin-top:16px}
+
+.skip{position:absolute;inset-inline-start:16px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:10;background:var(--bg);padding:6px 10px}
+.skip:not(:focus){width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Top line */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;padding-block:20px;border-bottom:1px solid var(--rule)}
+.nav{display:flex;flex-wrap:wrap;gap:4px 20px}
+.nav a{color:var(--muted);text-decoration:none;font-size:.9375rem}
+.nav a:hover{color:var(--text)}
+.langs{display:flex;gap:2px}
+.langs button{font:500 .8125rem/1 var(--sans);letter-spacing:.04em;color:var(--muted);background:none;border:0;padding:6px 7px;cursor:pointer;border-radius:3px}
+.langs button:hover{color:var(--text)}
+.langs button[aria-pressed="true"]{color:var(--text);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+.tools{display:flex;align-items:center;gap:10px}
+.theme-btn{display:grid;place-items:center;width:32px;height:30px;border:1px solid var(--rule);border-radius:6px;background:var(--bg);color:var(--muted);cursor:pointer}
+.theme-btn:hover{color:var(--text);border-color:var(--muted)}
+.theme-btn svg{width:16px;height:16px}
+
+/* Intro */
+.intro{display:grid;grid-template-columns:var(--label) minmax(0,1fr);gap:24px 40px;padding-block:48px 52px}
+.photo{width:160px;aspect-ratio:3 / 4;max-width:100%;object-fit:cover;border-radius:6px;background:var(--tint)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.25rem,5vw,3.25rem);line-height:1.08;letter-spacing:-.01em;margin:0}
+.role{margin:10px 0 0;font-size:1.125rem;font-weight:500}
+.role span{color:var(--muted);font-weight:400}
+.intro-text{display:grid;gap:14px;margin-top:24px;font-size:1.0625rem;line-height:1.65;max-width:62ch}
+.intro-text p{margin:0}
+.quick{display:flex;flex-wrap:wrap;gap:6px 22px;margin:22px 0 0;padding:0;list-style:none;font-size:.9375rem}
+
+/* Sections */
+.sec{display:grid;grid-template-columns:var(--label) minmax(0,1fr);gap:16px 40px;padding-block:44px;border-top:1px solid var(--rule)}
+h2{font-family:var(--serif);font-weight:600;font-size:1.375rem;line-height:1.25;margin:0;text-wrap:balance}
+html[lang="he"] h2,html[lang="he"] h1.post-title{font-family:var(--sans)}
+.body{min-width:0}
+.rows{display:grid;gap:14px;margin:0}
+.row{display:grid;grid-template-columns:var(--sub) minmax(0,1fr);gap:4px 24px}
+.row dt,.row .k{color:var(--muted)}
+.row dd{margin:0}
+
+/* Projects */
+.works{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.work{margin:0;display:grid;gap:12px;align-content:start}
+.work img{display:block;width:100%;height:auto;aspect-ratio:16 / 9;object-fit:cover;object-position:top;border:1px solid var(--rule);border-radius:6px;background:var(--tint)}
+.work .tree{margin:0;aspect-ratio:16 / 9;display:flex;align-items:center;padding:16px 22px;border:1px solid var(--rule);border-radius:6px;background:var(--tint);font:400 .875rem/1.7 ui-monospace,"Cascadia Mono",Consolas,monospace;white-space:pre;overflow:auto;text-align:left}
+.work figcaption{display:grid;gap:4px}
+.work .name{font-weight:600}
+.work .what{color:var(--muted);font-size:.875rem}
+[dir="rtl"] .work .what{text-align:right}
+.group-title{margin:0 0 14px;font-size:1rem;font-weight:600}
+#works > * + .group-title{margin-top:40px}
+.thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px}
+.thumb{margin:0;display:grid;gap:8px;align-content:start}
+.thumb img{display:block;width:100%;height:auto;aspect-ratio:16 / 9;object-fit:cover;object-position:top;border:1px solid var(--rule);border-radius:5px;background:var(--tint)}
+.thumb figcaption{display:grid;gap:2px}
+.thumb .name{font-weight:600;font-size:.9375rem}
+.thumb p{margin:0;font-size:.875rem;color:var(--muted)}
+.work p{margin:2px 0 0;font-size:.9375rem}
+.also{margin-top:30px;display:grid;gap:12px;max-width:68ch}
+.also p{margin:0}
+.sites{display:inline}
+
+/* Experience */
+.job{display:grid;grid-template-columns:var(--sub) minmax(0,1fr);gap:4px 24px;padding-bottom:28px}
+.job + .job{padding-top:28px;border-top:1px solid var(--rule)}
+.job:last-child{padding-bottom:0}
+.when{color:var(--muted);font-size:.9375rem}
+.when .dur{display:block;font-size:.8125rem}
+.job h3{margin:0;font-size:1.0625rem;font-weight:600;line-height:1.4}
+.org{margin:2px 0 0;color:var(--muted)}
+.job ul{margin:10px 0 0;padding-inline-start:1.15em;display:grid;gap:4px;max-width:66ch}
+
+/* Inspiration */
+.prose-sm{display:grid;gap:14px;max-width:64ch}
+.prose-sm p{margin:0}
+
+/* Blog list */
+.posts{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.post{display:grid;grid-template-columns:var(--sub) minmax(0,1fr);gap:4px 24px}
+.post time{color:var(--muted);font-size:.9375rem}
+.post a{font-weight:600;font-size:1.0625rem}
+.post p{margin:4px 0 0;color:var(--muted);max-width:64ch}
+
+/* Contacts */
+.contacts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.contacts li{display:grid;grid-template-columns:var(--sub) minmax(0,1fr) auto;gap:4px 24px;align-items:baseline}
+.contacts .k{color:var(--muted)}
+.contacts .v{overflow-wrap:anywhere}
+.copy{font:500 .8125rem/1 var(--sans);color:var(--muted);background:none;border:1px solid var(--rule);border-radius:4px;padding:5px 8px;cursor:pointer}
+.copy:hover{color:var(--text);border-color:var(--muted)}
+
+/* Post reader */
+.reader{padding-block:36px 64px;max-width:680px}
+.back{text-decoration:none;font-size:.9375rem}
+h1.post-title{font-size:clamp(1.75rem,4vw,2.25rem);line-height:1.2;margin:20px 0 10px}
+.meta{color:var(--muted);font-size:.9375rem;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.prose{font-size:1.0625rem;line-height:1.72;max-width:64ch}
+.prose p{margin:1em 0}
+.prose ul{padding-inline-start:1.2em}
+.prose code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:.88em;background:var(--tint);padding:.1em .3em;border-radius:3px;direction:ltr;unicode-bidi:isolate}
+.more{margin-top:44px;padding-top:24px;border-top:1px solid var(--rule)}
+.more h2{font-size:1.125rem;margin-bottom:16px}
+
+footer{border-top:1px solid var(--rule);padding-block:24px 36px;color:var(--muted);font-size:.875rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
+
+@media (max-width:760px){
+  .intro,.sec{grid-template-columns:minmax(0,1fr)}
+  .intro{padding-block:32px 40px}
+  .photo{width:112px}
+  .sec{padding-block:36px}
+  .works{grid-template-columns:minmax(0,1fr)}
+  .thumbs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:420px){.thumbs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){
+  .row,.job,.post{grid-template-columns:minmax(0,1fr)}
+  .contacts li{grid-template-columns:minmax(0,1fr) auto}
+  .contacts .k{grid-column:1 / -1}
+}
+</style>
+<link rel="stylesheet" href="motion.css">
+</head>
+<body data-motion="cv">
+<div id="bg" aria-hidden="true"><i class="glow b"></i><i class="glow a"></i></div>
+<div class="page">
+  <a class="skip" href="#main" data-i18n="skip"></a>
+
+  <div class="top">
+    <nav class="nav" id="nav">
+      <a href="#projects" data-i18n="nav_projects"></a>
+      <a href="#experience" data-i18n="nav_exp"></a>
+      <a href="#skills" data-i18n="nav_skills"></a>
+      <a href="#blog" data-i18n="nav_blog"></a>
+      <a href="#contact" data-i18n="nav_contact"></a>
+    </nav>
+    <div class="tools"><div class="langs" id="langs" role="group"></div><button type="button" class="theme-btn" id="themeBtn"></button></div>
+  </div>
+
+  <main id="main">
+    <div id="home">
+      <header class="intro" id="top">
+        <div><img class="photo" id="photo" src="photo.jpg" width="160" height="213" alt=""></div>
+        <div>
+          <h1 class="ltr" id="name">Igor Mavl</h1>
+          <p class="role"><span class="ltr" id="roleLine"></span> <span id="loc"></span></p>
+          <div class="intro-text">
+            <p data-i18n="intro_1"></p>
+            <p data-i18n="intro_2"></p>
+            <p data-i18n="intro_3"></p>
+          </div>
+          <ul class="quick" id="quick"></ul>
+        </div>
+      </header>
+
+      <section class="sec" id="projects">
+        <h2 data-i18n="projects_title"></h2>
+        <div class="body">
+          <div id="works"></div>
+          <div class="also" id="also"></div>
+        </div>
+      </section>
+
+      <section class="sec" id="experience">
+        <h2 data-i18n="exp_title"></h2>
+        <div class="body" id="jobs"></div>
+      </section>
+
+      <section class="sec" id="skills">
+        <h2 data-i18n="skills_title"></h2>
+        <dl class="body rows" id="skillRows"></dl>
+      </section>
+
+      <section class="sec" id="inspiration">
+        <h2 data-i18n="inspo_title"></h2>
+        <div class="body prose-sm">
+          <p data-i18n-html="inspo_1"></p>
+          <p data-i18n-html="inspo_2"></p>
+          <p data-i18n-html="inspo_3"></p>
+        </div>
+      </section>
+
+      <section class="sec" id="blog">
+        <h2 data-i18n="blog_title"></h2>
+        <ul class="body posts" id="posts"></ul>
+      </section>
+
+      <section class="sec" id="contact">
+        <h2 data-i18n="contact_title"></h2>
+        <div class="body">
+          <ul class="contacts" id="contacts"></ul>
+        </div>
+      </section>
+    </div>
+
+    <article class="reader" id="reader" hidden></article>
+  </main>
+
+  <footer>
+    <span id="footName"></span>
+    <span data-i18n="footer"></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+"use strict";
+
+/* =====================================================================
+   КОНТЕНТ. Всё, что нужно менять, находится в этом блоке.
+   Тексты на 4 языках: { ru: "...", uk: "...", en: "...", he: "..." }.
+   ===================================================================== */
+
+const PROFILE = {
+  name: "Igor Mavl",
+  photo: "photo.jpg",
+  roleLine: "Full Stack Developer (PHP / JavaScript)"
+};
+
+const CONTACTS = {
+  email: "gori4ka.developer@gmail.com",
+  phone: "+380 97 007 93 08",
+  telegram: "igor_p01",     // ник без @
+  youtube: "https://www.youtube.com/@gori4ka-php-to-android",
+  github: "https://github.com/gori4ka-dev",
+  linkedin: "",
+  dou: "https://dou.ua/users/gori4kadeveloper/",
+  workua: "https://www.work.ua/resumes/18346047/"
+};
+
+// Ссылки, которые подставляются в тексты вида [[devbox|DevBox]].
+const LINKS = {
+  devbox: "https://gori4ka-devbox.netlify.app/",
+  game: "https://gmario.netlify.app/",
+  youtube: CONTACTS.youtube
+};
+
+// Проекты (скриншоты в папке img/). group: client — по работе, pet — пет-проекты. Без img показывается дерево tree.
+const WORKS = [
+  {
+    group: "client", title: "otb.info", url: "https://www.otb.info/", img: "img/otb.jpg",
+    what: "WordPress · WP MIA",
+    d: {
+      ru: "Сайт сети ортопедических салонов OTB: больше 40 филиалов, события и новости, запись на приём и отправка рецепта онлайн. Дочерняя тема на моём фреймворке WP MIA.",
+      uk: "Сайт мережі ортопедичних салонів OTB: понад 40 філій, події та новини, запис на прийом і надсилання рецепта онлайн. Дочірня тема на моєму фреймворку WP MIA.",
+      en: "Site of the OTB medical supply chain: 40+ branches, events and news, appointment booking and online prescription upload. A child theme on my WP MIA framework.",
+      he: "אתר רשת OTB לציוד רפואי: יותר מ-40 סניפים, אירועים וחדשות, קביעת תורים ושליחת מרשמים אונליין. ערכת נושא בת על הפריימוורק WP MIA שלי."
+    }
+  },
+  {
+    group: "client", title: "stadthelden.de", url: "https://stadthelden.de/", img: "img/stadthelden.jpg",
+    what: "WordPress · WPML · WP MIA",
+    d: {
+      ru: "Сайт компании тимбилдингов и корпоративных ивентов: каталог событий, поводы, референсы и заявки, несколько языков на WPML. Дочерняя тема на WP MIA.",
+      uk: "Сайт компанії тимбілдингів і корпоративних івентів: каталог подій, приводи, референси й заявки, кілька мов на WPML. Дочірня тема на WP MIA.",
+      en: "Site of a team building and corporate events company: event catalog, occasions, references and inquiries, several languages with WPML. A child theme on WP MIA.",
+      he: "אתר של חברת גיבוש ואירועי חברה: קטלוג אירועים, הזדמנויות, לקוחות ובקשות להצעה, כמה שפות עם WPML. ערכת נושא בת על WP MIA."
+    }
+  },
+  {
+    group: "pet", title: "DevBox", url: "https://gori4ka-devbox.netlify.app/", img: "img/devbox.jpg",
+    what: { ru: "Веб-приложение · 73 инструмента", uk: "Вебзастосунок · 73 інструменти", en: "Web app · 73 tools", he: "אפליקציית ווב · 73 כלים" },
+    d: {
+      ru: "Мой рабочий набор инструментов: JSON, API Playground, SEO-анализатор, проверка DNS и почты, генераторы CSS и UI-компонентов, утилиты для WordPress. Почти всё работает прямо в браузере, без регистрации.",
+      uk: "Мій робочий набір інструментів: JSON, API Playground, SEO-аналізатор, перевірка DNS і пошти, генератори CSS та UI-компонентів, утиліти для WordPress. Майже все працює просто в браузері, без реєстрації.",
+      en: "My everyday toolkit: JSON, API Playground, an SEO analyzer, DNS and mail checks, CSS and UI component generators, WordPress utilities. Almost everything runs right in the browser, no sign-up.",
+      he: "ערכת העבודה שלי: JSON, ‏API Playground, מנתח SEO, בדיקות DNS ודואר, מחוללי CSS וקומפוננטות UI וכלים לוורדפרס. כמעט הכול רץ ישירות בדפדפן, בלי הרשמה."
+    }
+  },
+  {
+    group: "pet", title: "Gori4ka", url: "https://gmario.netlify.app/", img: "img/gmario.jpg",
+    what: { ru: "Игра на Godot (GDScript) · Android, Windows, браузер", uk: "Гра на Godot (GDScript) · Android, Windows, браузер", en: "Godot game (GDScript) · Android, Windows, browser", he: "משחק ב-Godot ‏(GDScript) · אנדרואיד, Windows, דפדפן" },
+    d: {
+      ru: "Пиксельный платформер «Круглый год» про программиста: 39 уровней в трёх мирах, боссы вроде Прокрастинации и Выгорания, мини-игры и игра по сети до 5 человек.",
+      uk: "Піксельний платформер про програміста: 39 рівнів у трьох світах, боси на кшталт Прокрастинації та Вигорання, міні-ігри й гра по мережі до 5 людей.",
+      en: "A pixel platformer about a programmer: 39 levels across three worlds, bosses like Procrastination and Burnout, mini-games and online play for up to 5 people.",
+      he: "פלטפורמר פיקסלים על מתכנת: 39 שלבים בשלושה עולמות, בוסים כמו דחיינות ושחיקה, מיני-משחקים ומשחק ברשת עד 5 שחקנים."
+    }
+  },
+  {
+    group: "pet", title: "TrackDesk",
+    tree: [
+      "trackdesk/",
+      "├── backend/  Supabase",
+      "├── web/      React + TS",
+      "├── desktop/  Tauri · Rust",
+      "└── mobile/   Flutter"
+    ],
+    what: { ru: "Тайм-трекер · веб, десктоп, мобильный · в разработке", uk: "Тайм-трекер · веб, десктоп, мобільний · у розробці", en: "Time tracker · web, desktop, mobile · in progress", he: "מעקב זמנים · ווב, דסקטופ, מובייל · בפיתוח" },
+    d: {
+      ru: "Трекер рабочего времени с общим бэкендом и тремя клиентами: веб на React и TypeScript, десктоп на Tauri (Rust + React) с таймером в трее, мобильное приложение на Flutter. Бэкенд на Supabase: Postgres, права доступа, рабочие пространства и общие API-контракты для всех клиентов.",
+      uk: "Трекер робочого часу зі спільним бекендом і трьома клієнтами: веб на React і TypeScript, десктоп на Tauri (Rust + React) з таймером у треї, мобільний застосунок на Flutter. Бекенд на Supabase: Postgres, права доступу, робочі простори та спільні API-контракти для всіх клієнтів.",
+      en: "A time tracker with one backend and three clients: a React and TypeScript web app, a Tauri desktop app (Rust + React) with a tray timer, and a Flutter mobile app. The backend runs on Supabase: Postgres, access rules, workspaces and shared API contracts for every client.",
+      he: "מעקב זמני עבודה עם בקאנד אחד ושלושה לקוחות: אפליקציית ווב ב-React וב-TypeScript, אפליקציית דסקטופ ב-Tauri ‏(Rust + React) עם טיימר במגש המערכת ואפליקציית מובייל ב-Flutter. הבקאנד רץ על Supabase: ‏Postgres, הרשאות גישה, סביבות עבודה וחוזי API משותפים לכל הלקוחות."
+    }
+  }
+];
+
+// Другие сайты на WordPress (миниатюры 800×450 в img/).
+const MORE_SITES = [
+  { host: "sokrativ.de", url: "https://sokrativ.de/", img: "img/sokrativ.jpg", d: {
+    ru: "Агентство кампаний для брендов, туризма и кино. DE/EN (WPML).",
+    uk: "Агенція кампаній для брендів, туризму й кіно. DE/EN (WPML).",
+    en: "Campaign agency for brands, destinations and films. DE/EN (WPML).",
+    he: "סוכנות קמפיינים למותגים, תיירות וקולנוע. DE/EN ‏(WPML)." } },
+  { host: "frohe-zukunft.de", url: "https://www.frohe-zukunft.de/", img: "img/frohe-zukunft.jpg", d: {
+    ru: "Жилищный кооператив в Галле: поиск квартир по районам и типу.",
+    uk: "Житловий кооператив у Галле: пошук квартир за районами й типом.",
+    en: "Housing cooperative in Halle: apartment finder by district and type.",
+    he: "קואופרטיב דיור בהאלה: חיפוש דירות לפי שכונה וסוג." } },
+  { host: "esthetic-pharma.com.ua", url: "https://esthetic-pharma.com.ua/", img: "img/esthetic-pharma.jpg", d: {
+    ru: "Дистрибьютор косметологии: каталог, обучение, события. PHP / Laravel.",
+    uk: "Дистриб’ютор косметології: каталог, навчання, заходи. PHP / Laravel.",
+    en: "Aesthetic medicine distributor: catalog, training, events. PHP / Laravel.",
+    he: "מפיץ מוצרי קוסמטיקה רפואית: קטלוג, הדרכות ואירועים. PHP / Laravel." } },
+  { host: "myopax.com", url: "https://myopax.com/", img: "img/myopax.jpg", d: {
+    ru: "Биотех-компания: клеточная и генная терапия мышечных заболеваний.",
+    uk: "Біотех-компанія: клітинна та генна терапія м’язових захворювань.",
+    en: "Biotech company working on cell and gene therapies for muscle disorders.",
+    he: "חברת ביוטק: טיפולים תאיים וגנטיים למחלות שריר." } },
+  { host: "gekartel.de", url: "https://gekartel.de/", img: "img/gekartel.jpg", d: {
+    ru: "Цифровые инфодисплеи и digital signage из Дрездена. Мультиязычный (WPML).",
+    uk: "Цифрові інфодисплеї та digital signage з Дрездена. Мультимовний (WPML).",
+    en: "Digital info displays and digital signage from Dresden. Multilingual (WPML).",
+    he: "תצוגות מידע דיגיטליות ו-digital signage מדרזדן. רב-לשוני (WPML)." } },
+  { host: "jupitos.com", url: "https://www.jupitos.com/", img: "img/jupitos.jpg", d: {
+    ru: "Консалтинг по внедрению Ivalua: услуги, референсы, карьера и блог. DE/EN.",
+    uk: "Консалтинг із впровадження Ivalua: послуги, референси, кар’єра та блог. DE/EN.",
+    en: "Ivalua implementation consultancy: services, references, careers and a blog. DE/EN.",
+    he: "ייעוץ להטמעת Ivalua: שירותים, לקוחות, קריירה ובלוג. DE/EN." } },
+  { host: "temot.com", url: "https://www.temot.com/", img: "img/temot.jpg", d: {
+    ru: "Международная сеть дистрибьюторов автозапчастей, штаб-квартира в Дюссельдорфе.",
+    uk: "Міжнародна мережа дистриб’юторів автозапчастин, штаб-квартира в Дюссельдорфі.",
+    en: "Global network of automotive aftermarket distributors, based in Düsseldorf.",
+    he: "רשת בינלאומית של מפיצי חלקי רכב, שבסיסה בדיסלדורף." } },
+  { host: "awg-rennsteig.de", url: "https://awg-rennsteig.de/", img: "img/awg-rennsteig.jpg", d: {
+    ru: "Жилищный кооператив в Тюрингии: поиск квартир по городу, цене и комнатам, портал для жильцов.",
+    uk: "Житловий кооператив у Тюрингії: пошук квартир за містом, ціною та кімнатами, портал для мешканців.",
+    en: "Housing cooperative in Thuringia: apartment search by town, rent and rooms, plus a tenant portal.",
+    he: "קואופרטיב דיור בתורינגיה: חיפוש דירות לפי עיר, מחיר וחדרים, ופורטל דיירים." } },
+  { host: "xproma.com", url: "https://xproma.com/", img: "img/xproma.jpg", d: {
+    ru: "Интегратор автоматизированной внутренней логистики из-под Гамбурга.",
+    uk: "Інтегратор автоматизованої внутрішньої логістики з-під Гамбурга.",
+    en: "Integrator of automated intralogistics systems near Hamburg.",
+    he: "אינטגרטור של מערכות אינטרלוגיסטיקה אוטומטיות ליד המבורג." } },
+  { host: "haregulator.co.il", url: "https://haregulator.co.il", img: "img/haregulator.jpg", d: {
+    ru: "Кастомный проект: личные кабинеты, модерация, AI-поиск на RAG, иврит.",
+    uk: "Кастомний проєкт: особисті кабінети, модерація, AI-пошук на RAG, іврит.",
+    en: "Custom project: user dashboards, moderation, RAG-based AI search, Hebrew.",
+    he: "פרויקט ייעודי: אזורים אישיים, פיקוח על תוכן, חיפוש AI מבוסס RAG, עברית." } },
+  { host: "redback.co.il", url: "https://redback.co.il", img: "img/redback.jpg", d: {
+    ru: "Интернет-магазин на WooCommerce, иврит, RTL.",
+    uk: "Інтернет-магазин на WooCommerce, іврит, RTL.",
+    en: "WooCommerce store, Hebrew, RTL.",
+    he: "חנות WooCommerce, עברית, RTL." } }
+];
+
+const ALSO = {
+  um: {
+    url: "https://ultimatemember.com",
+    d: {
+      ru: "плагин для сообществ и membership-сайтов на WordPress. Работал над вторым поколением core-плагина и платными дополнениями, помогал пользователям в поддержке.",
+      uk: "плагін для спільнот і membership-сайтів на WordPress. Працював над другим поколінням core-плагіна та платними доповненнями, допомагав користувачам у підтримці.",
+      en: "a WordPress plugin for community and membership sites. I worked on the second generation of the core plugin and its paid add-ons, and helped users in support.",
+      he: "תוסף וורדפרס לאתרי קהילה ו-membership. עבדתי על הדור השני של תוסף הליבה ועל הרחבות בתשלום, ועזרתי למשתמשים בתמיכה."
+    }
+  },
+  sites: ["partner-atlas.com", "wohnmobile-basel.ch", "kloster-mariastein.ch", "linguamon.de", "bluemepark.ch"]
+};
+
+// Опыт работы. Даты "ГГГГ-ММ", to: null = по сей день.
+const EXPERIENCE = [
+  {
+    company: { ru: "Фриланс", uk: "Фріланс", en: "Freelance", he: "פרילנס" }, role: "Full Stack Developer (PHP / JavaScript)", from: "2020-12", to: null,
+    place: { ru: "удалённо, несколько клиентов", uk: "дистанційно, кілька клієнтів", en: "remote, several clients", he: "מרחוק, כמה לקוחות" },
+    points: {
+      ru: ["Больше 150 веб-проектов для клиентов из Израиля, Германии, Украины и Эстонии: от верстки по макетам до бэкенда на PHP.",
+           "Создал фреймворк тем WP MIA: на нём работает 41 сайт немецкого веб-агентства (otb.info, stadthelden.de, sokrativ.de, frohe-zukunft.de и другие).",
+           "Больше 100 сайтов для постоянного клиента из Израиля: кастомные темы и плагины, WooCommerce, RTL-интерфейсы на иврите.",
+           "haregulator.co.il: личные кабинеты, бизнес-профили, модерация контента, AI-поиск на RAG.",
+           "esthetic-pharma.com.ua: каталог, обучение и события на PHP / Laravel.",
+           "LigaVS: перенёс готовое веб-приложение на чистый VPS (AlmaLinux) и настроил сервер с нуля — Node.js-бэкенд через Apache Passenger, HTTPS, DNS, почта и SMTP-отправка писем; перенос фронтенда, проверка API и диагностика серверных ошибок."],
+      uk: ["Понад 150 вебпроєктів для клієнтів з Ізраїлю, Німеччини, України та Естонії: від верстки за макетами до бекенду на PHP.",
+           "Створив фреймворк тем WP MIA: на ньому працює 41 сайт німецької веб-агенції (otb.info, stadthelden.de, sokrativ.de, frohe-zukunft.de та інші).",
+           "Понад 100 сайтів для постійного клієнта з Ізраїлю: кастомні теми й плагіни, WooCommerce, RTL-інтерфейси на івриті.",
+           "haregulator.co.il: особисті кабінети, бізнес-профілі, модерація контенту, AI-пошук на RAG.",
+           "esthetic-pharma.com.ua: каталог, навчання та заходи на PHP / Laravel.",
+           "LigaVS: переніс готовий вебзастосунок на чистий VPS (AlmaLinux) і налаштував сервер з нуля — Node.js-бекенд через Apache Passenger, HTTPS, DNS, поштові служби та SMTP-відправлення листів; перенесення фронтенду, перевірка API та діагностика серверних помилок."],
+      en: ["150+ web projects for clients in Israel, Germany, Ukraine and Estonia, from turning designs into code to PHP back ends.",
+           "Built WP MIA, my own theme framework: 41 sites of a German web agency run on it (otb.info, stadthelden.de, sokrativ.de, frohe-zukunft.de and others).",
+           "100+ sites for a long-term client in Israel: custom themes and plugins, WooCommerce, Hebrew RTL interfaces.",
+           "haregulator.co.il: user dashboards, business profiles, content moderation, RAG-based AI search.",
+           "esthetic-pharma.com.ua: catalog, training and events on PHP / Laravel.",
+           "LigaVS: migrated an existing web app to a clean VPS (AlmaLinux) and set up the server from scratch — Node.js back end via Apache Passenger, HTTPS, DNS, mail services and SMTP email; moved the front end, checked the API and diagnosed server errors."],
+      he: ["יותר מ-150 פרויקטי ווב עבור לקוחות מישראל, גרמניה, אוקראינה ואסטוניה: מהמרת עיצוב לקוד ועד צד שרת ב-PHP.",
+           "בניתי את WP MIA, פריימוורק ערכות נושא משלי: 41 אתרים של סוכנות ווב מגרמניה רצים עליו (otb.info, ‏stadthelden.de, ‏sokrativ.de, ‏frohe-zukunft.de ועוד).",
+           "יותר מ-100 אתרים עבור לקוח קבוע מישראל: ערכות נושא ותוספים ייעודיים, WooCommerce, ממשקי RTL בעברית.",
+           "haregulator.co.il: אזורים אישיים, פרופילים עסקיים, פיקוח על תוכן, חיפוש AI מבוסס RAG.",
+           "esthetic-pharma.com.ua: קטלוג, הדרכות ואירועים על PHP / Laravel.",
+           "LigaVS: העברת אפליקציית ווב קיימת ל-VPS נקי ‏(AlmaLinux) והקמת השרת מאפס — צד שרת Node.js דרך Apache Passenger, ‏HTTPS, ‏DNS, שירותי דואר ושליחת מיילים ב-SMTP; העברת הפרונטאנד, בדיקת ה-API ואבחון שגיאות שרת."]
+    }
+  },
+  {
+    company: "HighSkillWebSolution", role: "PHP Developer / Technical Support", from: "2020-01", to: "2020-11",
+    place: { ru: "Харьков", uk: "Харків", en: "Kharkiv", he: "חרקוב" },
+    points: {
+      ru: ["Второе поколение core-плагина Ultimate Member и платные дополнения к нему.",
+           "PHP, WordPress hooks, REST API, JavaScript/jQuery: новые функции, баги, совместимость.",
+           "Техподдержка пользователей плагина."],
+      uk: ["Друге покоління core-плагіна Ultimate Member і платні доповнення до нього.",
+           "PHP, WordPress hooks, REST API, JavaScript/jQuery: нові функції, баги, сумісність.",
+           "Техпідтримка користувачів плагіна."],
+      en: ["Second generation of the Ultimate Member core plugin and its paid add-ons.",
+           "PHP, WordPress hooks, REST API, JavaScript/jQuery: new features, bug fixes, compatibility.",
+           "Technical support for plugin users."],
+      he: ["הדור השני של תוסף הליבה של Ultimate Member והרחבות בתשלום.",
+           "PHP, ‏WordPress hooks, ‏REST API, ‏JavaScript/jQuery: פיצ'רים חדשים, תיקוני באגים ותאימות.",
+           "תמיכה טכנית במשתמשי התוסף."]
+    }
+  },
+  {
+    company: "DiamantWeb", role: "Backend Developer (PHP)", from: "2014-10", to: "2019-12",
+    place: { ru: "Харьков", uk: "Харків", en: "Kharkiv", he: "חרקוב" },
+    points: {
+      ru: ["Кастомные плагины, WooCommerce-решения, REST API и сложная бизнес-логика.",
+           "Корпоративные сайты и сайты-визитки, в том числе для Швейцарии и Германии."],
+      uk: ["Кастомні плагіни, WooCommerce-рішення, REST API та складна бізнес-логіка.",
+           "Корпоративні сайти й сайти-візитки, зокрема для Швейцарії та Німеччини."],
+      en: ["Custom plugins, WooCommerce solutions, REST APIs and complex business logic.",
+           "Corporate and small business websites, including for Switzerland and Germany."],
+      he: ["תוספים ייעודיים, פתרונות WooCommerce, ‏REST API ולוגיקה עסקית מורכבת.",
+           "אתרי תדמית ואתרים לעסקים קטנים, בין היתר לשווייץ ולגרמניה."]
+    }
+  },
+  {
+    // Известен только год: from/to без месяца показываются как «2013».
+    company: "SEO Albion", role: "Web Developer (PHP)", from: "2013", to: "2013",
+    place: { ru: "Харьков, филиал", uk: "Харків, філія", en: "Kharkiv office", he: "סניף חרקוב" },
+    points: {
+      ru: ["Сайты для клиентов компании: CZTransfer, FestCraft, Truck-diagnoz, Australia Education, LoveInHearts и сайт букмекерской конторы.",
+           "AlgoDiscovery — сайт проекта компании с SEO-исследованиями.",
+           "Плагин для WordPress."],
+      uk: ["Сайти для клієнтів компанії: CZTransfer, FestCraft, Truck-diagnoz, Australia Education, LoveInHearts і сайт букмекерської контори.",
+           "AlgoDiscovery — сайт проєкту компанії з SEO-дослідженнями.",
+           "Плагін для WordPress."],
+      en: ["Websites for the company's clients: CZTransfer, FestCraft, Truck-diagnoz, Australia Education, LoveInHearts and a sports betting site.",
+           "AlgoDiscovery: the site of the company's SEO research project.",
+           "A WordPress plugin."],
+      he: ["אתרים עבור לקוחות החברה: CZTransfer, ‏FestCraft, ‏Truck-diagnoz, ‏Australia Education, ‏LoveInHearts ואתר של סוכנות הימורי ספורט.",
+           "AlgoDiscovery: האתר של פרויקט מחקרי ה-SEO של החברה.",
+           "תוסף לוורדפרס."]
+    }
+  }
+];
+
+// Навыки: подпись берётся из переводов (sk_*), список технологий одинаковый для всех языков.
+const SKILLS = [
+  { k: "sk_main", items: "PHP, JavaScript, HTML5 / CSS3 / SASS, MySQL / SQL, REST API" },
+  { k: "sk_conf", items: "React, TypeScript, Laravel, WordPress, WooCommerce, ACF, jQuery, AJAX, Bootstrap, Git, Figma, SEO" },
+  { k: "sk_also", items: "Webflow, Shopify, React Native, Expo, Firebase, Supabase, Python, Rust, Tauri, Elementor" },
+  { k: "sk_ops", items: "Linux VPS (AlmaLinux), WHM / cPanel, Apache, Passenger, Node.js deployment, DNS, SSL / TLS, SMTP, Exim, Dovecot, SPF / DKIM" },
+  { k: "sk_ai", items: "RAG, ChatGPT, Claude, Make, n8n" },
+  { k: "sk_learn", items: "Flutter / Dart" },
+  { k: "sk_fun", items: "Godot, GDScript" }
+];
+
+/* Блог. Новый пост = новый объект в начале массива.
+   Формат текста: пустая строка = новый абзац, "## " = подзаголовок,
+   "- " = пункт списка, `код`, **жирный**, [ссылка](https://...). */
+const POSTS = [
+  {
+    slug: "wordpress-developer-learns-flutter",
+    date: "2026-10-12",
+    title: {
+      ru: "Зачем PHP-разработчику Flutter",
+      uk: "Навіщо PHP-розробнику Flutter",
+      en: "Why a PHP developer is learning Flutter",
+      he: "למה מפתח PHP לומד Flutter"
+    },
+    body: {
+      ru: `Я больше десяти лет пишу на PHP и делаю сайты на WordPress. Работа нравится, но всё чаще клиенты после сайта спрашивают про приложение. Хочется уметь сделать и его.
+
+      Выбрал Flutter: один код для Android и iOS, а Dart после PHP и JavaScript читается без особых проблем. React Native тоже пробовал, с Expo стартовать очень быстро, но Flutter мне пока ближе.
+
+      Приятно, что опыт с WordPress не пропадает. REST API, которые я годами писал для сайтов, отлично подходят как бэкенд для приложения.
+
+      Учусь в открытую: веду YouTube-канал [«Из PHP в Android»](https://www.youtube.com/@gori4ka-php-to-android), где показываю всё как есть, с ошибками. Так проще не бросить.`,
+      uk: `Я понад десять років пишу на PHP і роблю сайти на WordPress. Робота подобається, але дедалі частіше клієнти після сайту питають про застосунок. Хочеться вміти зробити і його.
+
+      Обрав Flutter: один код для Android та iOS, а Dart після PHP і JavaScript читається без особливих проблем. React Native теж пробував, з Expo стартувати дуже швидко, але Flutter мені поки ближчий.
+
+      Приємно, що досвід з WordPress не зникає. REST API, які я роками писав для сайтів, чудово підходять як бекенд для застосунку.
+
+      Вчуся відкрито: веду YouTube-канал [«Из PHP в Android»](https://www.youtube.com/@gori4ka-php-to-android), де показую все як є, з помилками. Так простіше не кинути.`,
+      en: `I've been writing PHP and building WordPress sites for more than ten years. I like the work, but more and more clients ask about an app once the site is done. I want to be able to build that too.
+
+      I picked Flutter: one codebase for Android and iOS, and Dart is easy enough to read after PHP and JavaScript. I've tried React Native as well, and Expo gets you started very fast, but Flutter suits me better for now.
+
+      The nice part is that my WordPress experience doesn't go to waste. The REST APIs I've been writing for sites make a good backend for an app.
+
+      I'm learning in the open: I run a [YouTube channel](https://www.youtube.com/@gori4ka-php-to-android) (in Russian) where I show everything as it is, mistakes included. It makes it harder to give up.`,
+      he: `אני כותב PHP ובונה אתרי וורדפרס כבר יותר מעשר שנים. אני אוהב את העבודה, אבל יותר ויותר לקוחות שואלים אחרי האתר גם על אפליקציה. אני רוצה לדעת לבנות גם אותה.
+
+      בחרתי ב-Flutter: קוד אחד לאנדרואיד ול-iOS, ו-Dart די קל לקריאה אחרי PHP ו-JavaScript. ניסיתי גם React Native, ועם Expo מתחילים ממש מהר, אבל בינתיים Flutter מתאים לי יותר.
+
+      החלק הטוב הוא שהניסיון בוורדפרס לא הולך לאיבוד. ממשקי ה-REST API שכתבתי במשך שנים לאתרים מתאימים מצוין כבקאנד לאפליקציה.
+
+      אני לומד בפומבי: מנהל [ערוץ יוטיוב](https://www.youtube.com/@gori4ka-php-to-android) (ברוסית) ומראה הכול כמו שזה, כולל הטעויות. ככה קשה יותר לוותר.`
+    }
+  },
+  {
+    slug: "hebrew-rtl-websites",
+    date: "2026-09-29",
+    title: {
+      ru: "Пара вещей, которые я понял про сайты на иврите",
+      uk: "Кілька речей, які я зрозумів про сайти на івриті",
+      en: "A few things I learned about Hebrew websites",
+      he: "כמה דברים שלמדתי על אתרים בעברית"
+    },
+    body: {
+      ru: `Несколько моих проектов на иврите, то есть справа налево. Первое, что понимаешь: перевести текст мало, зеркалится весь интерфейс.
+
+      Что я теперь делаю сразу: ставлю \`dir="rtl"\` на всю страницу, а в CSS пишу \`margin-inline-start\` вместо \`margin-left\`. Тогда половина вёрстки переворачивается сама.
+
+      Чаще всего ломаются слайдеры и анимации, которые считают от левого края, стрелки «назад», которые должны смотреть вправо, и телефоны с email внутри текста на иврите. Их нужно изолировать, иначе знаки скачут.
+
+      Этот сайт сделан так же. Переключите язык на HE вверху страницы.`,
+      uk: `Кілька моїх проєктів на івриті, тобто справа наліво. Перше, що розумієш: перекласти текст замало, дзеркалиться весь інтерфейс.
+
+      Що я тепер роблю одразу: ставлю \`dir="rtl"\` на всю сторінку, а в CSS пишу \`margin-inline-start\` замість \`margin-left\`. Тоді половина верстки перевертається сама.
+
+      Найчастіше ламаються слайдери й анімації, які рахують від лівого краю, стрілки «назад», які мають дивитися вправо, і телефони з email усередині тексту на івриті. Їх треба ізолювати, інакше знаки стрибають.
+
+      Цей сайт зроблений так само. Перемкніть мову на HE вгорі сторінки.`,
+      en: `Several of my projects are in Hebrew, which reads right to left. The first thing you learn is that translating the text isn't enough: the whole interface has to mirror.
+
+      What I do from the start now: put \`dir="rtl"\` on the whole page and write \`margin-inline-start\` instead of \`margin-left\` in CSS. Then half of the layout flips by itself.
+
+      What breaks most often: sliders and animations that measure from the left edge, "back" arrows that should point right, and phone numbers or emails inside Hebrew text. Those need to be isolated, or the punctuation jumps around.
+
+      This site works the same way. Switch the language to HE at the top of the page.`,
+      he: `כמה מהפרויקטים שלי בעברית, כלומר מימין לשמאל. הדבר הראשון שמבינים: לא מספיק לתרגם את הטקסט, כל הממשק צריך להתהפך.
+
+      מה אני עושה היום מההתחלה: שם \`dir="rtl"\` על כל העמוד, וב-CSS כותב \`margin-inline-start\` במקום \`margin-left\`. ככה חצי מהעימוד מתהפך לבד.
+
+      מה נשבר הכי הרבה: סליידרים ואנימציות שמחשבים מהקצה השמאלי, חיצי "חזרה" שצריכים להצביע ימינה, ומספרי טלפון ואימיילים בתוך טקסט עברי. צריך לבודד אותם, אחרת סימני הפיסוק קופצים.
+
+      גם האתר הזה בנוי כך. החליפו את השפה ל-HE בראש העמוד.`
+    }
+  },
+  {
+    slug: "firebase-or-supabase",
+    date: "2026-09-15",
+    title: {
+      ru: "Firebase или Supabase для своего проекта",
+      uk: "Firebase чи Supabase для власного проєкту",
+      en: "Firebase or Supabase for a side project",
+      he: "Firebase או Supabase לפרויקט צד"
+    },
+    body: {
+      ru: `Для своих мобильных экспериментов я не хочу поднимать сервер, поэтому пробовал и Firebase, и Supabase. Оба дают авторизацию, базу и хранилище файлов за вечер.
+
+      Firebase удобен, когда нужно быстро: хорошие SDK для Flutter и React Native, офлайн-кеш, push-уведомления. Но Firestore хранит документы, и сложные связи между данными в нём делать неудобно.
+
+      Supabase — это обычный Postgres. После многих лет с MySQL мне так привычнее: SQL, связи между таблицами, права доступа через Row Level Security.
+
+      Правило у меня простое: если данных много и они связаны, беру Supabase. Если нужен быстрый прототип с пушами, беру Firebase.`,
+      uk: `Для своїх мобільних експериментів я не хочу піднімати сервер, тому пробував і Firebase, і Supabase. Обидва дають авторизацію, базу й сховище файлів за вечір.
+
+      Firebase зручний, коли треба швидко: хороші SDK для Flutter і React Native, офлайн-кеш, push-сповіщення. Але Firestore зберігає документи, і складні зв’язки між даними в ньому робити незручно.
+
+      Supabase — це звичайний Postgres. Після багатьох років з MySQL мені так звичніше: SQL, зв’язки між таблицями, права доступу через Row Level Security.
+
+      Правило в мене просте: якщо даних багато і вони пов’язані, беру Supabase. Якщо потрібен швидкий прототип із пушами, беру Firebase.`,
+      en: `I don't want to run a server for my mobile experiments, so I've tried both Firebase and Supabase. Each gives you auth, a database and file storage in an evening.
+
+      Firebase is handy when you need speed: good SDKs for Flutter and React Native, an offline cache, push notifications. But Firestore stores documents, and complex relations between data are awkward there.
+
+      Supabase is plain Postgres. After years with MySQL that feels more familiar to me: SQL, relations between tables, access rules with Row Level Security.
+
+      My rule is simple: lots of related data means Supabase; a quick prototype with push notifications means Firebase.`,
+      he: `אני לא רוצה להרים שרת בשביל הניסויים שלי במובייל, אז ניסיתי גם את Firebase וגם את Supabase. שניהם נותנים אימות משתמשים, מסד נתונים ואחסון קבצים בערב אחד.
+
+      Firebase נוח כשצריך מהירות: ערכות SDK טובות ל-Flutter ול-React Native, מטמון אופליין והתראות פוש. אבל Firestore שומר מסמכים, וקשרים מורכבים בין נתונים לא נוחים בו.
+
+      Supabase הוא Postgres רגיל. אחרי שנים עם MySQL זה מוכר לי יותר: SQL, קשרים בין טבלאות והרשאות גישה עם Row Level Security.
+
+      הכלל שלי פשוט: הרבה נתונים שקשורים זה לזה, אני בוחר Supabase. אב טיפוס מהיר עם התראות פוש, אני בוחר Firebase.`
+    }
+  }
+];
+
+/* ===================== Тексты интерфейса ===================== */
+const I18N = {
+  ru: {
+    skip: "Перейти к содержанию", lang_label: "Язык", to_light: "Включить светлую тему", to_dark: "Включить тёмную тему", doc_role: "Full Stack-разработчик (PHP / JavaScript)",
+    loc: "· Киев, удалённо",
+    nav_projects: "Проекты", nav_exp: "Опыт", nav_skills: "Навыки", nav_blog: "Блог", nav_contact: "Контакты",
+    intro_1: "Привет! Я Игорь, full stack-разработчик из Киева. На PHP пишу 15 лет, коммерчески — с 2013 года: верстаю по макетам, пишу интерфейсы на JavaScript и бэкенд на PHP — от сайтов-визиток до интернет-магазинов, личных кабинетов и CRM. В работе REST API, Laravel и WordPress, а в своих проектах — React и TypeScript.",
+    intro_2: "Последние годы работаю над большими проектами на иврите (RTL) и добавляю в них AI-функции. Параллельно учу Flutter и веду об этом YouTube-канал.",
+    intro_3: "Ищу удалённую работу, полную или частичную: full stack, PHP, фронтенд или Flutter.",
+    projects_title: "Проекты", shot_alt: "Главная страница {d}",
+    grp_client: "По работе", grp_pet: "Пет-проекты", grp_more: "Другие сайты",
+    mia_line: "WP MIA — мой фреймворк тем для WordPress: родительская тема с конструктором секций на ACF, готовыми шаблонами и стартовой дочерней темой. На нём работает 41 сайт немецкого веб-агентства, в том числе все немецкие сайты выше.",
+    total_line: "Всего — больше 150 сайтов и веб-проектов для клиентов из Израиля, Германии, Украины, Швейцарии и Эстонии.",
+    yt_line: "[[youtube|Gori4ka: из PHP в Android]] — мой YouTube-канал. Серия «15 лет в PHP, N день во Flutter»: от первого запуска Android Studio до setState().",
+    earlier: "Раньше, в DiamantWeb (2014–2019):",
+    exp_title: "Опыт", now: "сейчас",
+    skills_title: "Навыки",
+    sk_main: "Основное", sk_conf: "Уверенно", sk_also: "Также знаю", sk_ops: "Серверы и хостинг", sk_ai: "AI и автоматизация", sk_learn: "Изучаю", sk_fun: "Для души",
+    edu_label: "Образование", edu_text: "Программный инженер, ХНУРЭ (Харьков), 2014–2019",
+    langs_label: "Языки", langs_text: "украинский и русский — свободно, английский — Elementary (A2), сейчас учу на курсах",
+    inspo_title: "Что меня вдохновляет",
+    inspo_1: "Мне нравится, когда сайт не просто показывает информацию, а помогает: находит нужное, считает, экономит время. Поэтому много занимаюсь AI: в одном проекте сделал поиск по контенту сайта на RAG, рутину автоматизирую через Make и n8n. Для себя собрал [[devbox|DevBox]] — набор инструментов, которыми пользуюсь каждый день.",
+    inspo_2: "Вторая большая тема — мобильная разработка. Учу Flutter, пробую React Native с Expo, Firebase и Supabase, а весь путь записываю на YouTube-канал [[youtube|«Из PHP в Android»]]. Так проще держать темп.",
+    inspo_3: "Для души делаю игры. Самая большая — [[game|«Круглый год»]], пиксельный платформер на Godot про программиста, который бежит к ноутбуку через все месяцы года, а в конце встречает Прокрастинацию, Синдром самозванца и Выгорание. Ещё люблю монтировать видео и возиться с домашними животными.",
+    blog_title: "Блог", back: "Все записи", more: "Другие записи", min: "мин чтения",
+    contact_title: "Контакты", c_phone: "Телефон", copy: "Копировать", copied: "Скопировано",
+    footer: "Обновлено в октябре 2026"
+  },
+  uk: {
+    skip: "Перейти до змісту", lang_label: "Мова", to_light: "Увімкнути світлу тему", to_dark: "Увімкнути темну тему", doc_role: "Full Stack-розробник (PHP / JavaScript)",
+    loc: "· Київ, дистанційно",
+    nav_projects: "Проєкти", nav_exp: "Досвід", nav_skills: "Навички", nav_blog: "Блог", nav_contact: "Контакти",
+    intro_1: "Привіт! Я Ігор, full stack-розробник з Києва. На PHP пишу 15 років, комерційно — з 2013 року: верстаю за макетами, пишу інтерфейси на JavaScript і бекенд на PHP — від сайтів-візиток до інтернет-магазинів, особистих кабінетів і CRM. У роботі REST API, Laravel і WordPress, а у власних проєктах — React і TypeScript.",
+    intro_2: "Останні роки працюю над великими проєктами на івриті (RTL) і додаю в них AI-функції. Паралельно вчу Flutter і веду про це YouTube-канал.",
+    intro_3: "Шукаю віддалену роботу, повну або часткову: full stack, PHP, фронтенд або Flutter.",
+    projects_title: "Проєкти", shot_alt: "Головна сторінка {d}",
+    grp_client: "По роботі", grp_pet: "Пет-проєкти", grp_more: "Інші сайти",
+    mia_line: "WP MIA — мій фреймворк тем для WordPress: батьківська тема з конструктором секцій на ACF, готовими шаблонами й стартовою дочірньою темою. На ньому працює 41 сайт німецької веб-агенції, зокрема всі німецькі сайти вище.",
+    total_line: "Загалом — понад 150 сайтів і вебпроєктів для клієнтів з Ізраїлю, Німеччини, України, Швейцарії та Естонії.",
+    yt_line: "[[youtube|Gori4ka: из PHP в Android]] — мій YouTube-канал. Серія «15 лет в PHP, N день во Flutter»: від першого запуску Android Studio до setState().",
+    earlier: "Раніше, у DiamantWeb (2014–2019):",
+    exp_title: "Досвід", now: "зараз",
+    skills_title: "Навички",
+    sk_main: "Основне", sk_conf: "Впевнено", sk_also: "Також знаю", sk_ops: "Сервери та хостинг", sk_ai: "AI та автоматизація", sk_learn: "Вивчаю", sk_fun: "Для душі",
+    edu_label: "Освіта", edu_text: "Програмний інженер, ХНУРЕ (Харків), 2014–2019",
+    langs_label: "Мови", langs_text: "українська та російська — вільно, англійська — Elementary (A2), зараз навчаюся на курсах",
+    inspo_title: "Що мене надихає",
+    inspo_1: "Мені подобається, коли сайт не просто показує інформацію, а допомагає: знаходить потрібне, рахує, економить час. Тому багато займаюся AI: в одному проєкті зробив пошук по контенту сайту на RAG, рутину автоматизую через Make і n8n. Для себе зібрав [[devbox|DevBox]] — набір інструментів, якими користуюся щодня.",
+    inspo_2: "Друга велика тема — мобільна розробка. Вчу Flutter, пробую React Native з Expo, Firebase і Supabase, а весь шлях записую на YouTube-канал [[youtube|«Из PHP в Android»]]. Так простіше тримати темп.",
+    inspo_3: "Для душі роблю ігри. Найбільша — [[game|піксельний платформер]] на Godot про програміста, який біжить до ноутбука крізь усі місяці року, а наприкінці зустрічає Прокрастинацію, Синдром самозванця та Вигорання. Ще люблю монтувати відео й поратися з домашніми тваринами.",
+    blog_title: "Блог", back: "Усі записи", more: "Інші записи", min: "хв читання",
+    contact_title: "Контакти", c_phone: "Телефон", copy: "Копіювати", copied: "Скопійовано",
+    footer: "Оновлено в жовтні 2026"
+  },
+  en: {
+    skip: "Skip to content", lang_label: "Language", to_light: "Switch to light theme", to_dark: "Switch to dark theme", doc_role: "Full Stack Developer (PHP / JavaScript)",
+    loc: "· Kyiv, remote",
+    nav_projects: "Projects", nav_exp: "Experience", nav_skills: "Skills", nav_blog: "Blog", nav_contact: "Contact",
+    intro_1: "Hi! I'm Igor, a full stack developer from Kyiv. I've been writing PHP for 15 years, commercially since 2013: I turn designs into code, build interfaces in JavaScript and back ends in PHP, from small business sites to online stores, user dashboards and CRMs. At work I use REST APIs, Laravel and WordPress; in my own projects, React and TypeScript.",
+    intro_2: "For the last few years I've been working on large Hebrew (RTL) projects and adding AI features to them. On the side I'm learning Flutter and run a YouTube channel about it.",
+    intro_3: "I'm looking for remote work, full-time or part-time: full stack, PHP, front end or Flutter.",
+    projects_title: "Projects", shot_alt: "{d} home page",
+    grp_client: "Client work", grp_pet: "Pet projects", grp_more: "More sites",
+    mia_line: "WP MIA is my WordPress theme framework: a parent theme with an ACF section builder, ready templates and a starter child theme. 41 sites of a German web agency run on it, including all the German sites above.",
+    total_line: "In total, more than 150 sites and web projects for clients in Israel, Germany, Ukraine, Switzerland and Estonia.",
+    yt_line: "[[youtube|Gori4ka: из PHP в Android]] is my YouTube channel (in Russian): a series on learning Flutter after 15 years of PHP, from opening Android Studio for the first time to setState().",
+    earlier: "Earlier, at DiamantWeb (2014–2019):",
+    exp_title: "Experience", now: "present",
+    skills_title: "Skills",
+    sk_main: "Core", sk_conf: "Confident", sk_also: "Also know", sk_ops: "Servers & hosting", sk_ai: "AI & automation", sk_learn: "Learning", sk_fun: "For fun",
+    edu_label: "Education", edu_text: "Software Engineer, Kharkiv National University of Radio Electronics, 2014–2019",
+    langs_label: "Languages", langs_text: "Ukrainian and Russian: fluent. English: Elementary (A2), currently taking a course.",
+    inspo_title: "What inspires me",
+    inspo_1: "I like it when a website doesn't just show information but actually helps: finds what you need, does the math, saves time. That's why I spend a lot of time on AI: in one project I built search over the site's content with RAG, and I automate routine work with Make and n8n. For myself I built [[devbox|DevBox]], a set of tools I use every day.",
+    inspo_2: "The other big topic is mobile development. I'm learning Flutter and trying React Native with Expo, Firebase and Supabase, and I record the whole journey on my [[youtube|YouTube channel]]. It helps me keep the pace.",
+    inspo_3: "For fun I make games. The biggest one is a [[game|pixel platformer]] (made in Godot) about a programmer who runs to his laptop through every month of the year and at the end meets Procrastination, Impostor Syndrome and Burnout. I also enjoy editing video and spending time with my pets.",
+    blog_title: "Blog", back: "All posts", more: "More posts", min: "min read",
+    contact_title: "Contact", c_phone: "Phone", copy: "Copy", copied: "Copied",
+    footer: "Updated October 2026"
+  },
+  he: {
+    skip: "דלגו לתוכן", lang_label: "שפה", to_light: "מעבר לערכת צבעים בהירה", to_dark: "מעבר לערכת צבעים כהה", doc_role: "מפתח Full Stack ‏(PHP / JavaScript)",
+    loc: "· קייב, עבודה מרחוק",
+    nav_projects: "פרויקטים", nav_exp: "ניסיון", nav_skills: "כישורים", nav_blog: "בלוג", nav_contact: "צור קשר",
+    intro_1: "שלום! אני איגור, מפתח Full Stack מקייב. אני כותב PHP כבר 15 שנה, ומקצועית מאז 2013: אני ממיר עיצובים לקוד, בונה ממשקים ב-JavaScript וצד שרת ב-PHP, מאתרי תדמית ועד חנויות מקוונות, אזורים אישיים ומערכות CRM. בעבודה אני משתמש ב-REST API, ‏Laravel ו-WordPress, ובפרויקטים שלי ב-React ו-TypeScript.",
+    intro_2: "בשנים האחרונות אני עובד על פרויקטים גדולים בעברית (RTL) ומוסיף להם יכולות AI. במקביל אני לומד Flutter ומנהל על זה ערוץ יוטיוב.",
+    intro_3: "אני מחפש עבודה מרחוק, במשרה מלאה או חלקית: ‏Full Stack, ‏PHP, פרונטאנד או Flutter.",
+    projects_title: "פרויקטים", shot_alt: "דף הבית של {d}",
+    grp_client: "פרויקטים ללקוחות", grp_pet: "פרויקטים אישיים", grp_more: "אתרים נוספים",
+    mia_line: "WP MIA הוא פריימוורק ערכות הנושא שלי לוורדפרס: ערכת נושא אם עם בונה סקשנים מבוסס ACF, תבניות מוכנות וערכת נושא בת התחלתית. 41 אתרים של סוכנות ווב מגרמניה רצים עליו, כולל כל האתרים הגרמניים שלמעלה.",
+    total_line: "בסך הכול, יותר מ-150 אתרים ופרויקטי ווב עבור לקוחות בישראל, גרמניה, אוקראינה, שווייץ ואסטוניה.",
+    yt_line: "[[youtube|Gori4ka: из PHP в Android]] הוא ערוץ היוטיוב שלי (ברוסית): סדרה על לימוד Flutter אחרי 15 שנות PHP, מהפתיחה הראשונה של Android Studio ועד ⁦setState()⁩.",
+    earlier: "קודם לכן, ב-DiamantWeb ‏(2014–2019):",
+    exp_title: "ניסיון", now: "היום",
+    skills_title: "כישורים",
+    sk_main: "עיקרי", sk_conf: "ברמה טובה", sk_also: "מכיר גם", sk_ops: "שרתים ואחסון", sk_ai: "AI ואוטומציה", sk_learn: "לומד עכשיו", sk_fun: "בשביל הכיף",
+    edu_label: "השכלה", edu_text: "מהנדס תוכנה, האוניברסיטה הלאומית לרדיו-אלקטרוניקה בחרקוב, 2014–2019",
+    langs_label: "שפות", langs_text: "אוקראינית ורוסית: שוטפת. אנגלית: בסיסית (A2), לומד כעת בקורס.",
+    inspo_title: "מה נותן לי השראה",
+    inspo_1: "אני אוהב כשאתר לא רק מציג מידע אלא באמת עוזר: מוצא את מה שצריך, מחשב, חוסך זמן. לכן אני עוסק הרבה ב-AI: באחד הפרויקטים בניתי חיפוש בתוכן האתר עם RAG, ואת העבודה השגרתית אני ממכן עם Make ו-n8n. לעצמי בניתי את [[devbox|DevBox]], ערכת כלים שאני משתמש בה כל יום.",
+    inspo_2: "הנושא הגדול השני הוא פיתוח מובייל. אני לומד Flutter ומנסה React Native עם Expo, ‏Firebase ו-Supabase, ומתעד את כל הדרך ב[[youtube|ערוץ היוטיוב]] שלי. זה עוזר לי לשמור על קצב.",
+    inspo_3: "בשביל הנשמה אני בונה משחקים. הגדול שבהם הוא [[game|פלטפורמר פיקסלים]] ב-Godot על מתכנת שרץ אל הלפטופ דרך כל חודשי השנה, ובסוף פוגש את הדחיינות, תסמונת המתחזה והשחיקה. אני גם אוהב לערוך וידאו ולבלות עם חיות המחמד שלי.",
+    blog_title: "בלוג", back: "כל הפוסטים", more: "עוד פוסטים", min: "דק׳ קריאה",
+    contact_title: "צור קשר", c_phone: "טלפון", copy: "העתקה", copied: "הועתק",
+    footer: "עודכן באוקטובר 2026"
+  }
+};
+
+/* ===================== Логика страницы ===================== */
+const LANGS = ["ru", "uk", "en", "he"];
+const LANG_LABEL = { ru: "RU", uk: "UA", en: "EN", he: "HE" };
+const LANG_NAME = { ru: "Русский", uk: "Українська", en: "English", he: "עברית" };
+const LOCALE = { ru: "ru-RU", uk: "uk-UA", en: "en-GB", he: "he-IL" };
+const RTL = { he: true };
+
+let lang = "en";
+let currentPost = null;
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const L = v => (v && typeof v === "object" && !Array.isArray(v)) ? (v[lang] != null ? v[lang] : (v.en || "")) : (v == null ? "" : v);
+const t = k => (I18N[lang] && I18N[lang][k] != null) ? I18N[lang][k] : (I18N.en[k] != null ? I18N.en[k] : k);
+const link = (url, label, cls) => `<a${cls ? ` class="${cls}"` : ""} href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+const linkify = s => esc(s).replace(/\[\[(\w+)\|([^\]]+)\]\]/g, (m, key, label) => LINKS[key] ? link(LINKS[key], label) : label);
+const pretty = url => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
+function fmtDate(iso, long) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const opts = long ? { day: "numeric", month: "long", year: "numeric" } : { day: "numeric", month: "short", year: "numeric" };
+  return new Intl.DateTimeFormat(LOCALE[lang], opts).format(new Date(y, m - 1, d));
+}
+function period(from, to) {
+  if (!from.includes("-")) return { span: to && to !== from ? `${from} — ${to}` : from, dur: "" };
+  const [fy, fm] = from.split("-").map(Number);
+  const now = new Date();
+  const [ty, tm] = to ? to.split("-").map(Number) : [now.getFullYear(), now.getMonth() + 1];
+  const total = (ty * 12 + tm) - (fy * 12 + fm) + 1;
+  const unit = (n, u) => new Intl.NumberFormat(LOCALE[lang], { style: "unit", unit: u, unitDisplay: "long" }).format(n);
+  const yrs = Math.floor(total / 12), mos = total % 12;
+  const p2 = n => String(n).padStart(2, "0");
+  return {
+    span: `${p2(fm)}.${fy} — ${to ? `${p2(tm)}.${ty}` : t("now")}`,
+    dur: [yrs ? unit(yrs, "year") : "", mos ? unit(mos, "month") : ""].filter(Boolean).join(" ")
+  };
+}
+const readTime = body => `${Math.max(1, Math.round(body.split(/\s+/).length / 180))} ${t("min")}`;
+const sortedPosts = () => POSTS.slice().sort((a, b) => b.date.localeCompare(a.date));
+
+function inline(s) {
+  return esc(s)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+function md(src) {
+  const out = [];
+  let para = [], list = null;
+  const flushPara = () => { if (para.length) { out.push(`<p>${inline(para.join(" "))}</p>`); para = []; } };
+  const flushList = () => { if (list) { out.push(`<ul>${list.map(li => `<li>${inline(li)}</li>`).join("")}</ul>`); list = null; } };
+  for (const raw of src.split("\n")) {
+    const line = raw.trim();
+    if (!line) { flushPara(); flushList(); continue; }
+    if (line.startsWith("## ")) { flushPara(); flushList(); out.push(`<h2>${inline(line.slice(3))}</h2>`); continue; }
+    if (line.startsWith("- ")) { flushPara(); (list = list || []).push(line.slice(2)); continue; }
+    flushList();
+    para.push(line);
+  }
+  flushPara(); flushList();
+  return out.join("");
+}
+function excerpt(body) {
+  const first = body.split(/\n\s*\n/).map(b => b.trim()).find(b => b && !b.startsWith("##") && !b.startsWith("- ")) || "";
+  const plain = first.replace(/\s+/g, " ").replace(/[`*]/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+  if (plain.length <= 160) return plain;
+  return plain.slice(0, plain.lastIndexOf(" ", 158)).replace(/[,.:;]$/, "") + "…";
+}
+const postItem = p => `<li class="post"><time datetime="${p.date}">${fmtDate(p.date)}</time><div>` +
+  `<a href="#post-${p.slug}" data-slug="${p.slug}">${esc(L(p.title))}</a><p>${esc(excerpt(L(p.body)))}</p></div></li>`;
+
+/* --- Отрисовка --- */
+function renderIntro() {
+  $("#name").textContent = PROFILE.name;
+  $("#roleLine").textContent = PROFILE.roleLine;
+  $("#loc").textContent = t("loc");
+  const photo = $("#photo");
+  photo.alt = PROFILE.name;
+  photo.hidden = !PROFILE.photo;
+  if (PROFILE.photo) photo.src = PROFILE.photo;
+  const q = [];
+  if (CONTACTS.email) q.push(`<li class="ltr">${link("mailto:" + CONTACTS.email, CONTACTS.email).replace(' target="_blank" rel="noopener"', "")}</li>`);
+  if (CONTACTS.telegram) q.push(`<li class="ltr">${link("https://t.me/" + CONTACTS.telegram.replace(/^@/, ""), "Telegram @" + CONTACTS.telegram.replace(/^@/, ""))}</li>`);
+  if (CONTACTS.phone) q.push(`<li class="ltr">${esc(CONTACTS.phone)}</li>`);
+  if (CONTACTS.github) q.push(`<li class="ltr">${link(CONTACTS.github, "GitHub")}</li>`);
+  if (CONTACTS.youtube) q.push(`<li class="ltr">${link(CONTACTS.youtube, "YouTube")}</li>`);
+  $("#quick").innerHTML = q.join("");
+  $("#footName").innerHTML = `© 2026 <span class="ltr">${esc(PROFILE.name)}</span>`;
+}
+
+function renderProjects() {
+  const card = w => `<figure class="work">
+      ${w.img ? `<a href="${esc(w.url)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="${esc(w.img)}" width="1200" height="675" loading="lazy" alt="${esc(t("shot_alt").replace("{d}", w.title))}"></a>`
+        : `<pre class="tree" dir="ltr">${esc(w.tree.join("\n"))}</pre>`}
+      <figcaption>${w.url ? link(w.url, w.title, "name ltr") : `<span class="name ltr">${esc(w.title)}</span>`}<span class="what" dir="auto">${esc(L(w.what))}</span><p>${esc(L(w.d))}</p></figcaption>
+    </figure>`;
+  const thumb = s => `<figure class="thumb">
+      <a href="${esc(s.url)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="${esc(s.img)}" width="800" height="450" loading="lazy" alt="${esc(t("shot_alt").replace("{d}", s.host))}"></a>
+      <figcaption>${link(s.url, s.host, "name ltr")}<p>${esc(L(s.d))}</p></figcaption>
+    </figure>`;
+  $("#works").innerHTML = [["client", "grp_client"], ["pet", "grp_pet"]].map(([g, k]) => {
+    const list = WORKS.filter(w => w.group === g);
+    return list.length ? `<h3 class="group-title">${esc(t(k))}</h3><div class="works">${list.map(card).join("")}</div>` : "";
+  }).join("") +
+    (MORE_SITES.length ? `<h3 class="group-title">${esc(t("grp_more"))}</h3><div class="thumbs">${MORE_SITES.map(thumb).join("")}</div>` : "");
+  $("#also").innerHTML =
+    `<p>${esc(t("mia_line"))}</p>` +
+    (CONTACTS.youtube ? `<p>${linkify(t("yt_line"))}</p>` : "") +
+    `<p>${link(ALSO.um.url, "Ultimate Member", "ltr")} — ${esc(L(ALSO.um.d))}</p>` +
+    `<p>${esc(t("earlier"))} <span class="sites">${ALSO.sites.map(s => link("https://" + s, s, "ltr")).join(", ")}</span></p>` +
+    `<p>${esc(t("total_line"))}</p>`;
+}
+
+function renderExperience() {
+  $("#jobs").innerHTML = EXPERIENCE.map(j => {
+    const p = period(j.from, j.to);
+    const pts = (j.points && (j.points[lang] || j.points.en)) || [];
+    return `<div class="job">
+      <div class="when"><span class="ltr">${esc(p.span)}</span><span class="dur">${esc(p.dur)}</span></div>
+      <div><h3 class="ltr">${esc(j.role)}</h3><p class="org"><span class="ltr">${esc(L(j.company))}</span> · ${esc(L(j.place))}</p>` +
+      (pts.length ? `<ul>${pts.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "") + `</div></div>`;
+  }).join("");
+}
+
+function renderSkills() {
+  const rows = SKILLS.map(s => [t(s.k), `<span class="ltr">${esc(s.items)}</span>`]);
+  rows.push([t("langs_label"), esc(t("langs_text"))]);
+  rows.push([t("edu_label"), esc(t("edu_text"))]);
+  $("#skillRows").innerHTML = rows.map(([k, v]) => `<div class="row"><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("");
+}
+
+function renderPosts() {
+  $("#posts").innerHTML = sortedPosts().map(postItem).join("");
+}
+
+function renderContacts() {
+  const row = (k, v, copy) => `<li><span class="k">${esc(k)}</span><span class="v">${v}</span>` +
+    (copy ? `<button type="button" class="copy" data-copy="${esc(copy)}">${esc(t("copy"))}</button>` : "<span></span>") + `</li>`;
+  const rows = [];
+  if (CONTACTS.email) rows.push(row("Email", `<span class="ltr">${esc(CONTACTS.email)}</span>`, CONTACTS.email));
+  if (CONTACTS.telegram) {
+    const h = CONTACTS.telegram.replace(/^@/, "");
+    rows.push(row("Telegram", link("https://t.me/" + h, "@" + h, "ltr"), "@" + h));
+  }
+  if (CONTACTS.phone) rows.push(row(t("c_phone"), `<span class="ltr">${esc(CONTACTS.phone)}</span>`, CONTACTS.phone));
+  if (CONTACTS.youtube) rows.push(row("YouTube", link(CONTACTS.youtube, pretty(CONTACTS.youtube), "ltr")));
+  if (CONTACTS.github) rows.push(row("GitHub", link(CONTACTS.github, pretty(CONTACTS.github), "ltr")));
+  if (CONTACTS.linkedin) rows.push(row("LinkedIn", link(CONTACTS.linkedin, pretty(CONTACTS.linkedin), "ltr")));
+  if (CONTACTS.dou) rows.push(row("DOU", link(CONTACTS.dou, pretty(CONTACTS.dou), "ltr")));
+  if (CONTACTS.workua) rows.push(row("Work.ua", link(CONTACTS.workua, pretty(CONTACTS.workua), "ltr")));
+  $("#contacts").innerHTML = rows.join("");
+}
+
+function renderReader() {
+  const p = POSTS.find(x => x.slug === currentPost);
+  if (!p) return;
+  const others = sortedPosts().filter(x => x !== p);
+  $("#reader").innerHTML =
+    `<a class="back" href="#blog">${RTL[lang] ? "→" : "←"} ${esc(t("back"))}</a>
+     <h1 class="post-title" id="readerTitle" tabindex="-1">${esc(L(p.title))}</h1>
+     <p class="meta"><time datetime="${p.date}">${fmtDate(p.date, true)}</time> · ${esc(readTime(L(p.body)))}</p>
+     <div class="prose">${md(L(p.body))}</div>` +
+    (others.length ? `<div class="more"><h2>${esc(t("more"))}</h2><ul class="posts">${others.map(postItem).join("")}</ul></div>` : "");
+}
+
+function copyText(btn) {
+  const value = btn.dataset.copy;
+  const done = () => { btn.textContent = t("copied"); setTimeout(() => { btn.textContent = t("copy"); }, 1600); };
+  const selectFallback = () => {
+    const el = btn.parentElement.querySelector(".v");
+    if (!el) return;
+    const r = document.createRange(); r.selectNodeContents(el);
+    const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  };
+  try { navigator.clipboard.writeText(value).then(done, selectFallback); } catch (e) { selectFallback(); }
+}
+
+/* --- Тема: светлая / тёмная. По умолчанию — как в системе посетителя, выбор запоминается --- */
+const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
+const darkMq = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => {
+  const a = document.documentElement.getAttribute("data-theme");
+  return a ? a === "dark" : darkMq.matches;
+};
+function renderThemeBtn() {
+  const b = $("#themeBtn");
+  if (!b) return;
+  const dark = isDark();
+  b.innerHTML = dark ? SUN : MOON;
+  b.setAttribute("aria-label", t(dark ? "to_light" : "to_dark"));
+  b.title = t(dark ? "to_light" : "to_dark");
+}
+function toggleTheme() {
+  const next = isDark() ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("cv-theme", next); } catch (e) {}
+  renderThemeBtn();
+}
+try {
+  const saved = localStorage.getItem("cv-theme");
+  if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
+} catch (e) {}
+if (darkMq.addEventListener) darkMq.addEventListener("change", renderThemeBtn);
+
+/* --- Язык --- */
+function renderLangs() {
+  const box = $("#langs");
+  box.setAttribute("aria-label", t("lang_label"));
+  box.innerHTML = LANGS.map(l => `<button type="button" data-lang="${l}" lang="${l}" title="${LANG_NAME[l]}" aria-pressed="${l === lang}">${LANG_LABEL[l]}</button>`).join("");
+}
+function setLang(l, save) {
+  lang = LANGS.includes(l) ? l : "en";
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL[lang] ? "rtl" : "ltr";
+  if (save) { try { localStorage.setItem("cv-lang", lang); } catch (e) {} }
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = linkify(t(el.dataset.i18nHtml)); });
+  $("#nav").setAttribute("aria-label", t("projects_title") + " · " + t("contact_title"));
+  document.title = `${PROFILE.name} · ${t("doc_role")}`;
+  renderLangs(); renderThemeBtn(); renderIntro(); renderProjects(); renderExperience(); renderSkills(); renderPosts(); renderContacts();
+  if (currentPost) renderReader();
+}
+function initialLang() {
+  const fromHash = location.hash.slice(1);
+  if (LANGS.includes(fromHash)) return fromHash;
+  try { const s = localStorage.getItem("cv-lang"); if (LANGS.includes(s)) return s; } catch (e) {}
+  const prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""]);
+  for (const p of prefs) {
+    const c = String(p).slice(0, 2).toLowerCase();
+    if (c === "ua") return "uk";
+    if (c === "iw") return "he";
+    if (LANGS.includes(c)) return c;
+  }
+  return "en";
+}
+
+/* --- Маршруты: #ru / #uk / #en / #he — язык, #post-<slug> — запись блога, остальное — разделы --- */
+function route() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (LANGS.includes(h)) { if (h !== lang) setLang(h, false); return; }
+  const p = h.startsWith("post-") ? POSTS.find(x => x.slug === h.slice(5)) : null;
+  if (p) {
+    currentPost = p.slug;
+    renderReader();
+    $("#home").hidden = true;
+    $("#reader").hidden = false;
+    window.scrollTo(0, 0);
+    const title = $("#readerTitle");
+    if (title) title.focus({ preventScroll: true });
+    return;
+  }
+  if (currentPost) {
+    currentPost = null;
+    $("#reader").hidden = true;
+    $("#home").hidden = false;
+    const target = h && document.getElementById(h);
+    if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
+  }
+}
+function go(hash) {
+  if (location.hash !== "#" + hash) {
+    try { history.pushState(null, "", "#" + hash); } catch (e) { location.hash = hash; }
+  }
+  route();
+}
+
+document.addEventListener("click", e => {
+  if (e.target.closest("#themeBtn")) { toggleTheme(); return; }
+  const langBtn = e.target.closest("[data-lang]");
+  if (langBtn) { setLang(langBtn.dataset.lang, true); return; }
+  const post = e.target.closest("[data-slug]");
+  if (post) { e.preventDefault(); go("post-" + post.dataset.slug); return; }
+  const copy = e.target.closest("[data-copy]");
+  if (copy) { copyText(copy); }
+});
+window.addEventListener("hashchange", route);
+window.addEventListener("popstate", route);
+
+setLang(initialLang(), false);
+route();
+
+/* --- Фон: мягкое свечение, которое плавно идёт за курсором --- */
+(function glowField() {
+  const a = document.querySelector(".glow.a"), b = document.querySelector(".glow.b");
+  if (!a || !b) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const pos = { ax: 0, ay: 0, bx: 0, by: 0 };
+  let target = null, lastMove = 0;
+
+  const place = () => {
+    a.style.transform = `translate3d(${pos.ax}px,${pos.ay}px,0)`;
+    b.style.transform = `translate3d(${pos.bx}px,${pos.by}px,0)`;
+  };
+  // Without a cursor (phones, or an idle mouse) the glow drifts slowly on its own.
+  const drift = t => ({
+    x: innerWidth * (0.5 + 0.32 * Math.sin(t / 9000)),
+    y: innerHeight * (0.42 + 0.26 * Math.cos(t / 11000))
+  });
+  function frame(t) {
+    const idle = !target || t - lastMove > 4000;
+    const goal = idle ? drift(t) : target;
+    const k = idle ? 0.02 : 0.09;
+    pos.ax += (goal.x - pos.ax) * k;
+    pos.ay += (goal.y - pos.ay) * k;
+    // The second glow trails behind, a little off to the side.
+    const bx = goal.x - 180 + 120 * Math.sin(t / 5000), by = goal.y + 140 + 90 * Math.cos(t / 6000);
+    pos.bx += (bx - pos.bx) * 0.025;
+    pos.by += (by - pos.by) * 0.025;
+    place();
+    requestAnimationFrame(frame);
+  }
+
+  const start = drift(performance.now());
+  pos.ax = start.x; pos.ay = start.y; pos.bx = start.x - 180; pos.by = start.y + 140;
+  place();
+  if (reduce.matches) return;
+  window.addEventListener("pointermove", e => {
+    target = { x: e.clientX, y: e.clientY };
+    lastMove = performance.now();
+  }, { passive: true });
+  requestAnimationFrame(frame);
+})();
+})();
+</script>
+<script src="motion.js" defer></script>
+<script src="tech-icons.js" defer></script>
+<script src="tree.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+/* Print CV, A4. Same visual language as the site: IBM Plex, link blue, section labels in a left column. */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap");
+
+:root{
+  --text:#17191C;
+  --muted:#5C6470;
+  --rule:#DDE1E6;
+  --accent:#1D5FB4;
+  --label:31mm;
+  --serif:"IBM Plex Serif",Georgia,serif;
+  --sans:"IBM Plex Sans",Arial,sans-serif;
+}
+@page{size:A4;margin:13mm 14mm 13mm 14mm}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--text)}
+body{font-family:var(--sans);font-size:9.3pt;line-height:1.42;font-variant-numeric:tabular-nums;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:var(--accent);text-decoration:none}
+p{margin:0}
+ul{margin:0;padding-left:1.1em}
+li{margin:.12em 0}
+
+/* Header */
+.head{display:grid;grid-template-columns:var(--label) 1fr;gap:0 7mm;padding-bottom:5mm;border-bottom:1px solid var(--rule)}
+.photo{width:27mm;height:34mm;object-fit:cover;object-position:50% 30%;border-radius:2mm}
+h1{font-family:var(--serif);font-weight:600;font-size:24pt;line-height:1.05;margin:0}
+.role{margin-top:1.2mm;font-size:11pt;font-weight:500}
+.where{margin-top:.6mm;color:var(--muted)}
+.contacts{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:.6mm 3mm;margin-top:3.2mm;font-size:8.8pt}
+.contacts dt{color:var(--muted)}
+.contacts dd{margin:0}
+
+/* Sections */
+section{display:grid;grid-template-columns:var(--label) 1fr;gap:0 7mm;padding-top:4.2mm;margin-top:4.2mm;border-top:1px solid var(--rule)}
+.head + section{border-top:0;margin-top:0}
+h2{font-family:var(--serif);font-weight:600;font-size:11pt;line-height:1.25;margin:0}
+.summary p + p{margin-top:1.6mm}
+
+.job{break-inside:avoid-page}
+.job + .job{margin-top:4mm}
+.job-top{display:flex;justify-content:space-between;gap:4mm;align-items:baseline}
+.job h3{font-size:10.3pt;font-weight:600;margin:0}
+.dates{color:var(--muted);white-space:nowrap;font-size:8.8pt}
+.org{color:var(--muted);margin-top:.3mm}
+.proj{margin-top:1.8mm;break-inside:avoid}
+.proj-name{font-weight:600}
+.proj-role{color:var(--muted);font-size:8.6pt}
+.proj ul,.job > ul{margin-top:.6mm}
+.note{margin-top:1.4mm;color:var(--muted)}
+.stack{margin-top:1.2mm;color:var(--muted)}
+.stack b{color:var(--text);font-weight:500}
+
+.items{display:grid;gap:1.8mm}
+.item{break-inside:avoid}
+.item b{font-weight:600}
+
+.rows{display:grid;grid-template-columns:36mm 1fr;gap:1.1mm 4mm;margin:0}
+.rows dt{color:var(--muted)}
+.rows dd{margin:0}

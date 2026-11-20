@@ -1,0 +1,128 @@
+/* Scroll motion shared by index.html (body[data-motion="cv"]) and portfolio.html (body[data-motion="portfolio"]).
+   motion.js tags elements with data-m-r="<variant>" and adds .m-in when they scroll into view; without JS nothing is hidden.
+   Everything that moves sits behind prefers-reduced-motion: no-preference. */
+
+body[data-motion="cv"]{--m-accent:var(--accent);--m-accent-2:color-mix(in srgb,var(--accent) 35%,#14B8A6)}
+body[data-motion="portfolio"]{--m-accent:var(--orange);--m-accent-2:var(--sun)}
+
+/* ---------- Reading progress and back-to-top ---------- */
+.m-progress{position:fixed;top:0;left:0;right:0;z-index:100;height:3px;pointer-events:none;
+  background:linear-gradient(90deg,var(--m-accent),var(--m-accent-2));transform:scaleX(var(--m-p,0));transform-origin:left}
+[dir="rtl"] .m-progress{transform-origin:right;background:linear-gradient(-90deg,var(--m-accent),var(--m-accent-2))}
+.m-top{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline-end:20px;z-index:45;width:52px;height:52px;padding:0;
+  display:grid;place-items:center;border-radius:50%;cursor:pointer;
+  background:var(--bg,var(--paper));color:var(--text,var(--ink));border:1px solid var(--rule,var(--edge));
+  opacity:0;visibility:hidden;transform:translateY(12px) scale(.9);transition:opacity .3s,transform .3s,visibility .3s}
+.m-top.m-show{opacity:1;visibility:visible;transform:none}
+.m-top svg{width:52px;height:52px;overflow:visible}
+.m-top circle{fill:none;stroke-width:3}
+.m-top .m-ring-bg{stroke:var(--rule,var(--line))}
+.m-top .m-ring{stroke:var(--m-accent);stroke-linecap:round;stroke-dasharray:132;stroke-dashoffset:var(--m-ring,132);transform:rotate(-90deg);transform-origin:24px 24px}
+.m-top path{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.m-top:hover{border-color:var(--m-accent)}
+body[data-motion="portfolio"] .m-top{border:2px solid var(--edge);box-shadow:3px 3px 0 var(--drop)}
+
+/* ---------- Active section in the menu ---------- */
+.m-navlink{position:relative}
+.m-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;border-radius:2px;background:var(--m-accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+[dir="rtl"] .m-navlink::after{transform-origin:right}
+.m-navlink.m-current{color:var(--text,var(--ink))!important}
+.m-navlink.m-current::after{transform:scaleX(1)}
+body[data-motion="portfolio"] .m-navlink::after{height:3px;bottom:-7px}
+
+/* ---------- Timeline line along the experience list ---------- */
+.m-line{position:relative}
+.m-line::before,.m-line::after{content:"";position:absolute;top:0;bottom:0;width:3px;border-radius:3px;inset-inline-start:-21px}
+.m-line::before{background:var(--rule,var(--line))}
+.m-line::after{background:linear-gradient(var(--m-accent),var(--m-accent-2));transform:scaleY(var(--m-p,0));transform-origin:top}
+body[data-motion="portfolio"] .m-line::before,body[data-motion="portfolio"] .m-line::after{inset-inline-start:-14px;width:4px}
+@media (max-width:760px){.m-line::before,.m-line::after{inset-inline-start:-11px}}
+
+/* ---------- Heading accent bar ---------- */
+.m-head::after{content:"";display:block;width:40px;height:3px;margin-top:12px;border-radius:3px;background:var(--m-accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.2,.7,.2,1) .25s}
+[dir="rtl"] .m-head::after{transform-origin:right}
+.m-head.m-in::after{transform:scaleX(1)}
+body[data-motion="portfolio"] .m-head::after{width:72px;height:6px;margin-top:18px;border:2px solid var(--edge);border-radius:4px;background:var(--orange)}
+body[data-motion="portfolio"] .index .m-head::after,body[data-motion="portfolio"] .contact .m-head::after{border-color:var(--on-plum);background:var(--sun)}
+body[data-motion="portfolio"] .yt .m-head::after{border-color:var(--on-orange);background:var(--on-orange)}
+
+/* ---------- CV page: sticky glass header, numbered sections, sticky section titles ---------- */
+body[data-motion="cv"] #home{counter-reset:m-sec}
+body[data-motion="cv"] .sec{counter-increment:m-sec}
+body[data-motion="cv"] .sec > h2::before{content:counter(m-sec,decimal-leading-zero);display:block;margin-bottom:8px;font:500 .75rem/1 var(--sans);letter-spacing:.14em;color:var(--m-accent)}
+@media (min-width:761px){
+  body[data-motion="cv"] .top{position:sticky;top:0;z-index:30;
+    background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    box-shadow:0 0 0 100vmax color-mix(in srgb,var(--bg) 82%,transparent);clip-path:inset(0 -100vmax);transition:padding .3s}
+  body[data-motion="cv"].m-scrolled .top{padding-block:12px}
+  body[data-motion="cv"] section[id]{scroll-margin-top:84px}
+  body[data-motion="cv"] .sec > h2{position:sticky;top:96px;align-self:start}
+}
+body[data-motion="cv"] .work > a,body[data-motion="cv"] .thumb > a{display:block}
+
+/* ---------- Portfolio: tech marquee ---------- */
+.m-marquee{direction:ltr;overflow:hidden;border-block:2px solid var(--edge);background:var(--paper);padding-block:22px;user-select:none}
+.m-track{display:flex;width:max-content;gap:0;will-change:transform}
+.m-track span{flex:none;padding-inline:22px;font:800 clamp(1.9rem,4.4vw,3.4rem)/1 var(--font);letter-spacing:-.02em;white-space:nowrap}
+.m-track span:nth-child(4n+1){color:var(--ink)}
+.m-track span:nth-child(4n+3){color:transparent;-webkit-text-stroke:2px var(--ink)}
+.m-track span.m-dot{padding-inline:4px;color:var(--orange);font-size:clamp(1.2rem,2.6vw,2rem)}
+
+/* ---------- Spotlight that follows the cursor on cards ---------- */
+.m-spot{position:relative}
+.m-spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--m-accent) 15%,transparent),transparent 65%)}
+.m-spot:hover::after{opacity:1}
+
+/* ---------- Reveal on scroll ---------- */
+@media (prefers-reduced-motion: no-preference){
+  /* The transition is only on while a block is coming in (.m-anim); hiding off screen is instant,
+     and between reveals the page's own hover transitions apply. */
+  [data-m-r].m-anim{transition:opacity .75s cubic-bezier(.2,.7,.2,1) var(--m-delay,0ms),transform .85s cubic-bezier(.2,.7,.2,1) var(--m-delay,0ms),
+    filter .85s cubic-bezier(.2,.7,.2,1) var(--m-delay,0ms),clip-path 1s cubic-bezier(.7,0,.2,1) var(--m-delay,0ms)}
+  [data-m-r]:not(.m-in){opacity:0}
+  [data-m-r="up"]:not(.m-in){transform:translateY(32px)}
+  [data-m-r="scale"]:not(.m-in){transform:translateY(40px) scale(.94)}
+  [data-m-r="side"]:not(.m-in){transform:translateX(-40px)}
+  [dir="rtl"] [data-m-r="side"]:not(.m-in){transform:translateX(40px)}
+  [data-m-r="pop"]:not(.m-in){transform:scale(.6)}
+  [data-m-r="blur"]:not(.m-in){transform:translateY(16px);filter:blur(12px)}
+  [data-m-r="wipe"]:not(.m-in){opacity:1;clip-path:inset(0 0 100% 0)}
+  [data-m-r="wipe"].m-in{clip-path:inset(0 0 0 0)}
+  /* Scrolling up, blocks enter from above: they slide down and screenshots open from their bottom edge. */
+  [data-m-r="up"][data-m-from="top"]:not(.m-in){transform:translateY(-32px)}
+  [data-m-r="scale"][data-m-from="top"]:not(.m-in){transform:translateY(-40px) scale(.94)}
+  [data-m-r="blur"][data-m-from="top"]:not(.m-in){transform:translateY(-16px);filter:blur(12px)}
+  [data-m-r="wipe"][data-m-from="top"]:not(.m-in){clip-path:inset(100% 0 0 0)}
+}
+/* Heading bars also draw out when the heading leaves the screen, so they draw in again next time. */
+.m-head:not(.m-in)::after{transition-delay:0s}
+
+/* ---------- Scroll-linked parallax where the browser supports scroll timelines ---------- */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    body[data-motion="portfolio"] .card img{animation:m-zoom linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+    body[data-motion="portfolio"] .hero .photo-wrap{animation:m-drift linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+    body[data-motion="portfolio"] .hero h1{animation:m-rise linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+    body[data-motion="cv"] .intro .photo{animation:m-drift-sm linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  }
+}
+@keyframes m-zoom{from{transform:scale(1.15)}to{transform:scale(1)}}
+@keyframes m-drift{to{transform:translateY(110px) rotate(6deg);opacity:.3}}
+@keyframes m-rise{to{transform:translateY(-70px);opacity:.2}}
+@keyframes m-drift-sm{to{transform:translateY(40px) scale(.94);opacity:.4}}
+
+@media print{
+  [data-m-r]{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}
+  .m-progress,.m-top,.m-marquee{display:none!important}
+}
+
+/* ---------- v3: the coloured bands let the background tree (tree.js) show through softly ---------- */
+body[data-motion="portfolio"] .stats,
+body[data-motion="portfolio"] .index,
+body[data-motion="portfolio"] .contact,
+body[data-motion="portfolio"] footer{background:color-mix(in srgb,var(--plum) 86%,transparent)}
+body[data-motion="portfolio"] .yt{background:color-mix(in srgb,var(--orange) 90%,transparent)}
+body[data-motion="portfolio"] .blog{background:color-mix(in srgb,var(--soft) 82%,transparent)}
