@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="ru">
 <head>
+  
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PQ6J66TJKV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PQ6J66TJKV');
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gori4ka · Igor Mavl</title>
@@ -453,9 +464,6 @@ footer a{color:var(--on-plum)}
    НАСТРОЙКИ И КОНТЕНТ. Всё, что нужно менять, — в этом блоке.
    Тексты на 4 языках: { ru: "...", uk: "...", en: "...", he: "..." }.
    ===================================================================== */
-
-// Google Analytics 4: вставьте свой ID вида "G-XXXXXXXXXX". Пусто = аналитика выключена.
-const GA_ID = "";
 
 // Ссылки на PDF-резюме (лежат рядом с этим файлом). false = кнопка скрыта.
 const SHOW_PDF = true;
@@ -962,19 +970,9 @@ const link = (url, label, cls, track) => `<a${cls ? ` class="${cls}"` : ""} href
 const linkify = s => esc(s).replace(/\[\[(\w+)\|([^\]]+)\]\]/g, (m, key, label) => LINKS[key] ? link(LINKS[key], label, "", key) : label);
 const pretty = url => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 
-/* --- Аналитика: GA4 грузится, только если задан GA_ID --- */
-function track(name, params) {
-  if (typeof window.gtag === "function") window.gtag("event", name, params || {});
-}
-if (GA_ID) {
-  const s = document.createElement("script");
-  s.async = true;
-  s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_ID);
-  document.head.appendChild(s);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () { window.dataLayer.push(arguments); };
-  window.gtag("js", new Date());
-  window.gtag("config", GA_ID, { anonymize_ip: true });
+/* GA4 загружается один раз в <head>. Здесь только отправка событий. */
+function track(name, params = {}) {
+  if (typeof window.gtag === "function") window.gtag("event", name, params);
 }
 
 function fmtDate(iso, long) {
@@ -1213,10 +1211,26 @@ function go(hash) {
 
 document.addEventListener("click", e => {
   const tracked = e.target.closest("[data-track]");
-  if (tracked) track("click", { target: tracked.dataset.track });
+  if (tracked) {
+    const target = tracked.dataset.track;
+    const href = tracked.getAttribute("href") || "";
+    const params = { link_url: href, portfolio_language: lang };
+
+    if (target.startsWith("project:") || target.startsWith("site:")) {
+      track("project_click", {
+        ...params,
+        project_name: target.split(":").slice(1).join(":"),
+        project_group: target.startsWith("site:") ? "site" : "featured"
+      });
+    } else if (["email", "telegram", "phone", "github", "youtube", "dou", "workua"].includes(target)) {
+      track("contact_click", { ...params, contact_method: target });
+    }
+    // PDF-ссылки отслеживаются встроенным file_download GA4,
+    // поэтому отдельное событие для cv_pdf не отправляем.
+  }
   if (e.target.closest("#themeBtn")) { toggleTheme(); return; }
   const langBtn = e.target.closest("[data-lang]");
-  if (langBtn) { setLang(langBtn.dataset.lang, true); track("language", { lang: langBtn.dataset.lang }); return; }
+  if (langBtn) { setLang(langBtn.dataset.lang, true); track("language_change", { selected_language: langBtn.dataset.lang }); return; }
   const post = e.target.closest("[data-slug]");
   if (post) { e.preventDefault(); go("post-" + post.dataset.slug); return; }
   const copy = e.target.closest("[data-copy]");
@@ -1315,5 +1329,6 @@ route();
 <script src="motion.js" defer></script>
 <script src="tech-icons.js" defer></script>
 <script src="tree.js" defer></script>
+
 </body>
 </html>
